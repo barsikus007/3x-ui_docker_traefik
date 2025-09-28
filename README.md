@@ -1,23 +1,32 @@
 # 3X-UI with traefik
 
-## Fix lacking of 3X-UI config features
+## Install
 
-1. Install `litecli`
-2. Run `./setup-panel.sh`
+1. `mkdir db/`
+2. Copy `*.env.example` files to `*.env` and edit
+3. `./setup.sh`
+4. Wait until panel starts
+5. Login to panel (default `admin`:`admin`)
+6. Check settings guide below
+   1. !!Panel -> Authentication!!
 
 ## 3X-UI Panel Settings
 
-I. General
+### I. General
+
+done by `./setup.sh`
 
 1. General
    1. URI Path
       1. with slashes`/youradminpath/`
 
-II. Authentication
+### II. Authentication
 
 1. Change it lol
 
-III. Subscription
+### III. Subscription
+
+done by `./setup.sh`
 
 1. Enable Subscription Service
 2. URI Path
@@ -25,7 +34,9 @@ III. Subscription
 3. Reverse Proxy URI
    1. with URI Path (`https://sub.example.com/yoursubpath/sub/`)
 
-IV. Subscription Json (TODO why does it needed?)
+### IV. Subscription Json (TODO why does it needed?)
+
+done by `./setup.sh`
 
 1. URI Path
    1. with slashes`/yoursubpath/json/`
@@ -34,7 +45,7 @@ IV. Subscription Json (TODO why does it needed?)
 
 ## 3X-UI Xray Configs
 
-I. Basics
+### I. Basics
 
 1. Basic Routing
    <!-- 1. BitTorrent -->
@@ -49,32 +60,36 @@ I. Basics
    1. !FOR IP LIMITING
 3. Enable WARP
 
-II. Routing Rules
+### II. Routing Rules
 
 1. `geoip:ru` and `geosite:category-gov-ru` change Outbound to warp proxy instead of direct
    1. `geosite:category-gov-ru regexp:.*\.ru$ regexp:.*\.рф$`
    2. direct dont work in vless?
 
+## VLESS Inbound
+
+- Remark: name
+- Protocol: vless
+- Port: 443
+- Proxy Protocol
+- Security: REALITY
+  - uTLS: chrome
+  - Dest (Target)
+  - SNI
+  - Get New Cert
+- Peer: Flow: xtls-rprx-vision
+
+## ufw cheatsheet
+
+- `sudo ufw status numbered`
+- `sudo ufw allow 12345`
+  - `sudo ufw allow 51820/udp`
+  - `sudo ufw delete NUM`
+  - `sudo ufw allow http`
+  - `sudo ufw allow https`
+- `sudo ufw reload`
+
 ## TODO
 
-- rootless 3x-ui
 - more docs
-- Inbound
-  - Remark: name
-  - Protocol: vless
-  - Port: 443
-  - Proxy Protocol
-  - Security: REALITY
-    - uTLS: chrome
-    - Dest (Target)
-    - SNI
-    - Get New Cert
-  - Peer: Flow: xtls-rprx-vision
-- ufw
-  - `sudo ufw status numbered`
-  - `sudo ufw allow 12345`
-    - `sudo ufw allow 51820/udp`
-    - `sudo ufw delete NUM`
-    - `sudo ufw allow http`
-    - `sudo ufw allow https`
-  - `sudo ufw reload`
+- more automation
