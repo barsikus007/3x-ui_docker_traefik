@@ -31,7 +31,7 @@ services:
       traefik.http.routers.3xui-sub.entrypoints: webSecure
       traefik.http.routers.3xui-sub.tls.certresolver: ddnsResolver
 
-      traefik.tcp.routers.3xui-sni.rule: HostSNI(`${HOST_MASK?}`) || HostSNI(`*`)
+      traefik.tcp.routers.3xui-sni.rule: HostSNI(`${HOST_MASK?}`)
       traefik.tcp.routers.3xui-sni.service: 3xui-sni
       traefik.tcp.services.3xui-sni.loadbalancer.server.port: 443
       traefik.tcp.services.3xui-sni.loadbalancer.proxyProtocol.version: 2
